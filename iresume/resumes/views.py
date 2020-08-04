@@ -42,11 +42,15 @@ def cleandata(data):
 # Create your views here.
 def home(request, username):
     if request.method == 'GET':
-        print(username)
+        current_user = request.user
         data = ResumeData.objects.get(username=username)
-        print(data)
         basicdata = cleandata(data)
+        if current_user.username == username:
+            basicdata.update({'user_auth': True})
+        else:
+            basicdata.update({'user_auth': False})
         return render(request, 'index.html', context=basicdata)
+
 
 
 @login_required(login_url='login')

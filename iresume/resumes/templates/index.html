@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width"/>
     <meta name="description" content="The Curriculum Vitae of Joe Bloggs."/>
     <meta charset="UTF-8">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="{% static 'css/fonts.css' %}" rel='stylesheet'>
 
@@ -15,11 +15,86 @@
     <!--    <script>-->
     <!--            localStorage.setItem('activeTab', '#1b');-->
     <!--    </script>-->
+    <style>
+        .label-container{
+	position:fixed;
+	bottom:40px;
+	right:445px;
+	display:table;
+	visibility: hidden;
+}
+
+.label-text{
+	color:#FFF;
+	background:rgba(51,51,51,0.5);
+	display:table-cell;
+	vertical-align:middle;
+	padding:10px;
+	border-radius:3px;
+}
+
+.label-arrow{
+	display:table-cell;
+	vertical-align:middle;
+	color:#333;
+	opacity:0.5;
+}
+
+.float{
+	position:fixed;
+	width:45px;
+	height:45px;
+	bottom:40px;
+	right:400px;
+	background-color:#06C;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	font-size:155%;
+	margin:22%;
+}
+
+a.float + div.label-container {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease;
+}
+
+a.float:hover + div.label-container{
+  visibility: visible;
+  opacity: 1;
+}
+
+
+    </style>
 </head>
 <body id="top">
 <div id="cv" class="instaFade">
-
-    {% if user.is_authenticated %}
+    {% if not user_auth %}
+    <div id="resume_btn" style="display:none">
+        <a href="#" onclick="showBlogs('resume_btn')" class="float">
+            <i class="fa fa-vcard my-float"></i>
+        </a>
+        <div class="label-container">
+            <div class="label-text">Resume</div>
+            <i class="fa fa-play label-arrow"></i>
+        </div>
+    </div>
+    <div id="blog_btn" style="display:block">
+        <a href="#" onclick="showBlogs('blog_btn')" class="float">
+            <i class="fa fa-bold my-float"></i>
+        </a>
+        <div class="label-container">
+            <div class="label-text">Blog</div>
+            <i class="fa fa-play label-arrow"></i>
+        </div>
+    </div>
+    {% endif %}
+    {% if user_auth %}
     <div class="row">
         <div class="col-lg-12">
             <div class="col-lg-4">
@@ -45,7 +120,8 @@
         <div id="name">
             <h1 class="c_name">{{name}}</h1>
             <h2 class="c_name">{{job_title}}</h2>
-             <h1 class="c_name" id="blog_title" style="display:none;margin-left: 60%;margin-bottom: -5%;margin-top: 5%;">My Blog</h1>
+            <h1 class="c_name" id="blog_title" style="display:none;margin-bottom: -5%;margin-top: 5%;">
+                My Blog</h1>
         </div>
 
         <div id="contactDetails" class=" ">
@@ -53,7 +129,7 @@
                 <li>Email: <a href="#">
                     <target
                     ="_blank">{{email}}</a></li>
-                <li>Contact: <a href="http://www.bloggs.com">{{contact}}</a></li>
+                <li>Contact: <a href="#">{{contact}}</a></li>
             </ul>
         </div>
         <div class="clear"></div>
@@ -195,6 +271,9 @@
 
 
     }
+
+
+
 
 </script>
 </body>
