@@ -24,7 +24,7 @@ SECRET_KEY = 'n@xuxpwit=)fo9h*jjl4v_^ul(3ed2jjkb2t!ui#m&#!mm&o5@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','*.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'aericasingla.pythonanywhere.com']
 
 # Application definition
 
@@ -78,8 +78,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
